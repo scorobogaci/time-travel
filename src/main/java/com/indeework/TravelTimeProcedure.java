@@ -26,18 +26,18 @@ public class TravelTimeProcedure {
 
         long currentTime = startTime;
         double distance = totalDistance;
-        double timeOfArrival = currentTime + (distance / speed);
+        double eta = currentTime + (distance / speed);
 
-        while (timeOfArrival > endTimeForInterval) {
+        while (eta > endTimeForInterval) {
             distance = distance - speed * (endTimeForInterval - currentTime);
             speed = trafficDensityIntervals[index].getSpeed();
             currentTime = endTimeForInterval;
             endTimeForInterval = trafficDensityIntervals[index].getEndTime().toSecondOfDay();
-            timeOfArrival = currentTime + (distance / speed);
+            eta = currentTime + (distance / speed);
             trackIndex();
         }
 
-        return (long) (timeOfArrival - startTime);
+        return (long) (eta - startTime);
 
     }
 
